@@ -3,6 +3,7 @@ services:
   rutorrent:
     image: ghcr.io/linuxserver/rutorrent
     container_name: rutorrent
+    network_mode: bridge
     environment:
       - PUID=1000
       - PGID=1000
@@ -25,7 +26,7 @@ services:
       - 51413:51413
       - 6881:6881/udp
     restart: unless-stopped
-networks:
-  default:
-    external:
-      name: traefik_default
+# networks:
+#   default:
+#     external:
+#       name: traefik_default

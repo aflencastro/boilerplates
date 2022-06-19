@@ -4,6 +4,7 @@ services:
   traefik:
     image: "traefik:v2.7"
     container_name: "traefik"
+    network_mode: "bridge"
     ports:
       - "80:80"
       - "443:443"
@@ -12,3 +13,7 @@ services:
     volumes:
       - /etc/traefik:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock:ro
+# networks:
+#   default:
+#     external:
+#       name: bridge

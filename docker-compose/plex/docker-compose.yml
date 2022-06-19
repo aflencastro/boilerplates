@@ -3,30 +3,31 @@ services:
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex_ssl
+    network_mode: bridge
     environment:
       - PUID=1000
       - PGID=1000
       - VERSION=docker
-      - PLEX_CLAIM= "claim-e86xQ1NCNzvto34DSiCT"
+      - PLEX_CLAIM= "claim-zadpLf57jcdvtd_UaxZs"
     volumes:
       - ./plex_library:/config
       - /home/ubuntu/nextcloud/shared/politec:/politec
       - /home/ubuntu/nextcloud/shared/downloads:/downloads
       - /home/ubuntu/nextcloud/shared/cursos:/cursos
     # ports:
-    #   # - 32400:32400
-    #   - 1900:1900/udp
-    #   - 3005:3005
-    #   - 5353:5353/udp
-    #   - 8324:8324
-    #   - 32410:32410/udp
-    #   - 32412:32412/udp
-    #   - 32413:32413/udp
-    #   - 32414:32414/udp
-    #   - 32469:32469
+      # - 32400:32400
+      # - 1900:1900/udp
+      # - 3005:3005
+      # - 5353:5353/udp
+      # - 8324:8324
+      # - 32410:32410/udp
+      # - 32412:32412/udp
+      # - 32413:32413/udp
+      # - 32414:32414/udp
+      # - 32469:32469
     labels:
       - traefik.enable=true
-      - traefik.docker.network=traefik_public
+      # - traefik.docker.network=traefik_public
       - traefik.http.routers.plex.rule=Host(`plex.beteiro.app`)
       - traefik.http.routers.plex.entrypoints=websecure
       - traefik.http.services.plex.loadbalancer.server.port=32400
@@ -34,7 +35,7 @@ services:
       - traefik.frontend.rule=Host:plex.beteiro.app
       - traefik.http.routers.plex.tls=true
     restart: unless-stopped
-networks:
-  default:
-    external:
-      name: traefik_default
+# networks:
+#   default:
+#     external:
+#       name: traefik_default
