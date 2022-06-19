@@ -1,0 +1,31 @@
+version: "2.1"
+services:
+  rutorrent:
+    image: ghcr.io/linuxserver/rutorrent
+    container_name: rutorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik_public
+      - traefik.http.routers.rutorrent.rule=Host(`rutorrent.beteiro.app`)
+      - traefik.http.routers.rutorrent.entrypoints=websecure
+      # - traefik.http.services.rutorrent.loadbalancer.server.scheme=https
+      # - "traefik.http.services.rutorrent.loadbalancer.server.port=80"
+      - "traefik.frontend.rule=Host:rutorrent.beteiro.app"
+      - traefik.http.routers.rutorrent.tls=true
+      # - traefik.http.routers.rutorrent.certresolver=staging
+    volumes:
+      - /home/ubuntu/ru/config:/config
+      - /home/ubuntu/nextcloud/shared/downloads:/downloads
+    ports:
+      # - 80:80
+      - 5000:5000
+      - 51413:51413
+      - 6881:6881/udp
+    restart: unless-stopped
+networks:
+  default:
+    external:
+      name: traefik_default
