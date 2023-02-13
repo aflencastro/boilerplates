@@ -13,7 +13,7 @@ services:
       - traefik.http.routers.rutorrent.entrypoints=websecure
       - traefik.http.routers.rutorrent.tls=true
     volumes:
-      - ./config:/config
+      - ${DIR}/config:/config
       - ${STORAGE}/downloads:/downloads
     ports:
       # - 80:80
