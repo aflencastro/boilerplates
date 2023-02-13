@@ -11,15 +11,15 @@ global:
 
 # (Optional) Accesslog
 # ---
-# accesslog:
-#   format: common  # common, json, logfmt
-#   filePath: /var/log/traefik/access.log
+accesslog:
+  format: common  # common, json, logfmt
+  filePath: /var/log/traefik/access.log
 
 # (Optional) Enable API and Dashboard
 # ---
 api:
- dashboard: true  # true by default
- insecure: true  # Don't do this in production!
+  dashboard: true  # true by default
+  insecure: true  # Don't do this in production!
 
 # Entry Points configuration
 # ---
@@ -62,9 +62,7 @@ tls:
     default:
       defaultCertificate:
         certFile: /etc/traefik/certs/cert.pem
-        # certFile: /etc/letsencrypt/live/beteiro.app/fullchain.pem
-        keyFile: /etc/traefik/certs/cert-key.pem
-        # keyFile: /etc/letsencrypt/live/beteiro.app/privkey.pem
+        keyFile: /etc/traefik/certs/key.pem
 # (Optional) Disable TLS version 1.0 and 1.1
 #   options:
 #     default:
